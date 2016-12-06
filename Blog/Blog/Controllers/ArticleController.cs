@@ -56,5 +56,37 @@ namespace Blog.Controllers
             }
 
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Create(Article article)
+        {
+            if (ModelState.IsValid)
+            {
+                using(var database = new BlogDbContext())
+                {
+                    // Gets Author Id
+                    var authorId = database.Users
+                        .Where(u => u.UserName == this.User.Identity.Name)
+                        .First().Id;
+
+                    //Set articles author
+                    article.AuthorId = authorId;
+
+                    //Save article to DB
+                    database.Articles.Add(article);
+                    database.SaveChanges();
+
+                    return RedirectToAction("List");
+                }
+            }
+
+            return View(article);
+        }
     }
 }
