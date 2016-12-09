@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,5 +23,10 @@ namespace Blog.Models
         public  string AuthorId { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
+
+        public bool isUserAuthor(string username)
+        {
+            return this.Author.UserName.Equals(username);
+        }
     }
 }

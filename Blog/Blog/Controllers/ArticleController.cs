@@ -57,6 +57,8 @@ namespace Blog.Controllers
 
         }
 
+        [HttpGet]
+        [Authorize]     
         public ActionResult Create()
         {
             return View();
@@ -64,6 +66,8 @@ namespace Blog.Controllers
 
 
         [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Article article)
         {
             if (ModelState.IsValid)
@@ -87,6 +91,110 @@ namespace Blog.Controllers
             }
 
             return View(article);
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Edit(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var db = new BlogDbContext())
+            {
+                var article = db.Articles.FirstOrDefault(a => a.Id == id);
+
+                if(!this.IsAuthorizedToEdit(article))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                }
+
+                if (article == null)
+                {
+                    // validate
+                }
+
+                return View(article);
+            }
+
+        }
+
+        private bool IsAuthorizedToEdit(Article article)
+        {
+            bool isAuthor = article.isUserAuthor(User.Identity.Name);
+            bool isAdmin = User.IsInRole("Admin");
+
+            return isAdmin || isAuthor;
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Edit(Article article)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new BlogDbContext())
+                {
+                    // the article we received was changed //
+                    db.Entry(article).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("List");
+
+                }
+            }
+
+            return View(article);
+        }
+
+
+        [Authorize]
+        public ActionResult Delete(int? id)
+        {
+            using (var db = new BlogDbContext())
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                var article = db.Articles.FirstOrDefault(a => a.Id == id);
+
+                if (article == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(article);
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            using (var db = new BlogDbContext())
+            { 
+                if(id== null)
+                {
+                    // validate
+                }
+                var article = db.Articles.FirstOrDefault(a => a.Id == id);
+
+                if (article == null)
+                {
+                    // validate
+                }
+
+                db.Articles.Remove(article);
+                db.SaveChanges();
+
+                return RedirectToAction("List");
+               
+            }
         }
     }
 }

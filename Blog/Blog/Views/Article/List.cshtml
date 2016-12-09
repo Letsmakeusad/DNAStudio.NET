@@ -8,15 +8,17 @@
     @foreach (var article in Model)
     {
         <article class="col-sm-4">
-            <h1>
+            <h2>
                 @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id }, null)
                
-            </h1>
+            </h2>
             <p>
                 @article.Content
             </p>
-            <footer>
-               @article.Author.FullName
+            <footer class="pull-right">
+                <small class="author">
+                    --author @article.Author.FullName
+                </small>
             </footer>
 
         </article>
