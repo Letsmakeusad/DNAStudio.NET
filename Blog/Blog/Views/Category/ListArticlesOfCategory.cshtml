@@ -1,0 +1,30 @@
+﻿@model List<Blog.Models.Article>
+@{
+    ViewBag.Title = "ListArticlesOfCategory";
+}
+
+<h2>
+    <div class="container">
+
+        @foreach (var article in Model)
+        {
+            <article class="col-sm-4">
+                <h2>
+                    @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id }, null)
+
+                </h2>
+                <p>
+                    @article.Content
+                </p>
+                <footer class="pull-right">
+                    <small class="author">
+                        --author @article.Author.FullName
+                    </small>
+                </footer>
+
+            </article>
+        }
+
+    </div>
+
+</h2>

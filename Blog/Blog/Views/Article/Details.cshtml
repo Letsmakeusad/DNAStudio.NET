@@ -17,14 +17,22 @@
         <small class="author">
             --author @Model.Author.FullName
         </small>
-        <footer class="pull-right">
-            @if (User.IsInRole("Admin") || Model.isUserAuthor(User.Identity.Name))
-            {
-                @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
-                @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
-            }
-            
-            @Html.ActionLink("Back", "Index", "Article/List", null, new { @class = "btn btn-default btn-xs" })
+        <footer>
+            <div class="pull-left">
+                @foreach (var tag in Model.Tags)
+                {
+                    <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.id }, new { @class = "btn btn-default btn-xs " })</span>
+                }
+            </div>
+            <div class="pull-right">
+                @if (User.IsInRole("Admin") || Model.isUserAuthor(User.Identity.Name))
+               { 
+                    @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+                    @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+                }
+                @Html.ActionLink("Back", "List", "Home", null, new { @class = "btn btn-default btn-xs" })
+            </div>
+          
         </footer>
     </article>
 </div>

@@ -4,7 +4,7 @@
 }
 
 <div class="container">
-
+    <div class="row">
     @foreach (var article in Model)
     {
         <article class="col-sm-4">
@@ -15,13 +15,19 @@
             <p>
                 @article.Content
             </p>
-            <footer class="pull-right">
-                <small class="author">
+            <footer>
+                <div class="pull-left">
+                    @foreach (var tag in article.Tags)
+                    {
+                        @Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.id}, new { @class = "btn btn-default btn-xs " })
+                    }
+                </div>
+                <small class="author pull-right">
                     --author @article.Author.FullName
                 </small>
             </footer>
 
         </article>
     }
-
+    </div>
 </div>
