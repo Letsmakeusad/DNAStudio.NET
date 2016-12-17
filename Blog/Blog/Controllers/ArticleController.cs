@@ -25,7 +25,7 @@ namespace Blog.Controllers
 
                 var articles = dataBase.Articles
                     .Include(a => a.Author)
-                    .Include(a => a.Tags)
+                    .Include(a => a.Tags)                                 
                     .ToList();
 
                 return View(articles);
@@ -33,6 +33,7 @@ namespace Blog.Controllers
 
         }
 
+ 
         public ActionResult Details(int? id)
         {
             if(id == null)
@@ -40,20 +41,21 @@ namespace Blog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            using (var dataBase = new BlogDbContext())
-            {
-                var article = dataBase.Articles.Where(a => a.Id == id)
-               .Include(a => a.Author).Include(a=> a.Tags).First();
+            var dataBase = new BlogDbContext();
 
-                if(article == null)
+            var article = dataBase.Articles
+                .Where(a => a.Id == id)
+                .Include(a => a.Author)
+                .Include(a => a.Tags)                  
+                .First();
+                
+
+            if (article == null)
                 {
                     return HttpNotFound();
-                }
-
+                } 
+                  
                 return View(article);
-
-            }
-
         }
 
         [HttpGet]
@@ -92,7 +94,7 @@ namespace Blog.Controllers
                     //Save article to DB
                     database.Articles.Add(article);
                     database.SaveChanges();
-
+                    
                     return RedirectToAction("List");
                 }
             
@@ -204,7 +206,11 @@ namespace Blog.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                var article = db.Articles.Include(a=> a.Category).Include(a=> a.Tags).FirstOrDefault(a => a.Id == id);
+                var article = db.Articles
+                    .Include(a=> a.Category)
+                    .Include(a=> a.Tags)
+                    .Include(a=> a.Comments)
+                    .FirstOrDefault(a => a.Id == id);
 
                 ViewBag.Tags = string.Join(", ", article.Tags.Select(t => t.Name));
 
@@ -241,5 +247,15 @@ namespace Blog.Controllers
                
             }
         }
+
+        
+        
+        
+        
+        
+           
+
     }
+
+    
 }

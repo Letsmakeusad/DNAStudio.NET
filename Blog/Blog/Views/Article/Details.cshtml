@@ -1,13 +1,15 @@
-﻿@model Blog.Models.Article
+﻿@model  Blog.Models.Article
 
 @{
-    ViewBag.Title = "Details";
+    
+        ViewBag.Title = "Details";
 }
 
 <div class="container">
     <article>
         <header>
             <h2>
+
                 @Model.Title
             </h2>
         </header>
@@ -23,17 +25,48 @@
                 {
                     <span>@Html.ActionLink(tag.Name, "ListArticlesByTag", "Tag", new { @id = tag.id }, new { @class = "btn btn-default btn-xs " })</span>
                 }
-            </div>
+            </div>            
             <div class="pull-right">
                 @if (User.IsInRole("Admin") || Model.isUserAuthor(User.Identity.Name))
                { 
                     @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
                     @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+
                 }
                 @Html.ActionLink("Back", "List", "Home", null, new { @class = "btn btn-default btn-xs" })
-            </div>
-          
+
+            </div>          
         </footer>
     </article>
 </div>
-<hr />
+    
+<article>
+    <h2>Comment Secion</h2>
+    <div>               
+       @foreach (var comment in Model.Comments)
+       {
+           if (comment.ArticleId == Model.Id)
+           {
+               <div class="container">
+                   <div class="well">
+                       @comment.Content
+                       
+                   </div> 
+               </div>
+              
+           }
+       }
+    </div>
+    
+
+</article>
+
+<article>
+    <div class="container">
+        <div class="well">
+            <h2>Comment</h2>
+            @Html.ActionLink("Create", "Create", "Comment", new { @id = Model.Id }, null)
+            
+        </div>
+    </div>
+</article>

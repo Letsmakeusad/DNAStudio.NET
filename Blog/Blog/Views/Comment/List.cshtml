@@ -1,0 +1,18 @@
+﻿@model List<Blog.Models.Comment>
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var comment in Model)
+        {
+            <div class="container">
+               
+            <p>
+                @comment.Content
+            </p>
+            </div>
+        }
+    </div>
+</div>
