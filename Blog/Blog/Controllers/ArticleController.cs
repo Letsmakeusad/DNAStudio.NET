@@ -46,7 +46,8 @@ namespace Blog.Controllers
             var article = dataBase.Articles
                 .Where(a => a.Id == id)
                 .Include(a => a.Author)
-                .Include(a => a.Tags)                  
+                .Include(a => a.Tags)
+                .Include(a=> a.Comments)                
                 .First();
                 
 

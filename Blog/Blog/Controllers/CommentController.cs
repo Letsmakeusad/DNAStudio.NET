@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -44,8 +45,8 @@ namespace Blog.Controllers
 
                 db.Comments.Add(opinion);         
                 db.SaveChanges();
-               
-                return View(opinion);
+
+                return RedirectToAction("Details", "Article", new { @id = comment.Id });
             }
                 
         }
@@ -61,5 +62,41 @@ namespace Blog.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Delete(Comment index)
+        {
+      
+                return View(index);
+       
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            using (var db = new BlogDbContext())
+            {
+                var comment = db.Comments.FirstOrDefault(a => a.Id == id );
+
+                if(comment == null)
+                {
+                    return HttpNotFound();
+                }
+
+                db.Comments.Remove(comment);
+                db.SaveChanges();
+
+                return RedirectToAction("List", "Article");
+            }
+        }
+
+
     }
+
+
 }

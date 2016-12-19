@@ -295,6 +295,7 @@
     <Content Include="Views\Tag\ListArticlesByTag.cshtml" />
     <Content Include="Views\Comment\Create.cshtml" />
     <Content Include="Views\Comment\List.cshtml" />
+    <Content Include="Views\Comment\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

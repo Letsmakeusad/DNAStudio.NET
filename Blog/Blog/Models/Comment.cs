@@ -28,6 +28,8 @@ namespace Blog.Models
         [MaxLength(300)]
         public string Content { get; set; }
 
+        
+
         public int PostId { get; set; }
 
         public virtual Article Article { get; set; }

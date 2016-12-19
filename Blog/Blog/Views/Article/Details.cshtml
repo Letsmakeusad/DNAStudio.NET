@@ -33,7 +33,7 @@
                     @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
 
                 }
-                @Html.ActionLink("Back", "List", "Home", null, new { @class = "btn btn-default btn-xs" })
+                @Html.ActionLink("Back", "ListCategories", "Home", null, new { @class = "btn btn-default btn-xs" })
 
             </div>          
         </footer>
@@ -51,6 +51,14 @@
                    <div class="well">
                        @comment.Content
                        
+                       <div>
+                           @if (User.IsInRole("Admin") || Model.isUserAuthor(User.Identity.Name))
+                           {
+                               @Html.ActionLink("Delete", "Delete", "Comment", new { @id = comment.Id }, new { @class = "btn btn-danger btn-xs" })
+                           }
+                           
+                       </div>
+
                    </div> 
                </div>
               
