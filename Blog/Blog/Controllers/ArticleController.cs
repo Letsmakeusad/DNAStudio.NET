@@ -96,7 +96,7 @@ namespace Blog.Controllers
                     database.Articles.Add(article);
                     database.SaveChanges();
                     
-                    return RedirectToAction("List");
+                    return RedirectToAction("ListCategories", "Home");
                 }
             
         }

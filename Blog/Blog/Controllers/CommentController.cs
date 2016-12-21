@@ -27,8 +27,9 @@ namespace Blog.Controllers
             using (var db = new BlogDbContext())
             {
                 var comment = new Comment();
+                var user = db.Users.FirstOrDefault(u => u.UserName.Equals(this.User.Identity.Name));
                 comment.PostId = model.Id;
-
+                comment.CommentAuthor = user.FullName;
                 return View(comment);
             }
 
@@ -41,8 +42,7 @@ namespace Blog.Controllers
             using (var db = new BlogDbContext())
             {
 
-                var opinion = new Comment(comment.Id, comment.Content);
-
+                var opinion = new Comment(comment.Id, comment.Content, comment.CommentAuthor);
                 db.Comments.Add(opinion);         
                 db.SaveChanges();
 

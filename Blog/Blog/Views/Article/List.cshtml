@@ -9,12 +9,8 @@
     {
         <article class="col-sm-4">
             <h2>
-                @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id }, null)
-               
+                @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id }, null)             
             </h2>
-            <p>
-                @article.Content
-            </p>
             <footer>
                 <div class="pull-left">
                     @foreach (var tag in article.Tags)
@@ -23,7 +19,7 @@
                     }
                 </div>
                 <small class="author pull-right">
-                    --author @article.Author.FullName
+                    by @article.Author.FullName
                 </small>
             </footer>
 

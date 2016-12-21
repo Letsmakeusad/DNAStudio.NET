@@ -3,20 +3,17 @@
     ViewBag.Title = "ListArticlesOfCategory";
 }
 
-<h2>
-    <div class="container">
-
+    <h1 class="text-center">ARTICLES</h1>
+ <div class="container">
+      
         @foreach (var article in Model)
         {
-            <article class="col-sm-4">
+            <article class="well">
                 <h2>
                     @Html.ActionLink(article.Title, "Details", "Article", new { @id = article.Id }, null)
-
-                </h2>
-                <p>
-                    @article.Content
-                </p>
-                <footer class="pull-right">
+                    
+                </h2>              
+                <footer class="pull-left">
                     <small class="author">
                         --author @article.Author.FullName
                     </small>
@@ -25,6 +22,5 @@
             </article>
         }
 
-    </div>
+ </div>
 
-</h2>

@@ -1116,8 +1116,10 @@ body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.42857143;
-  color: #9900cc;
-  background-color: #ffffff;
+  color: #000000;
+  background: url(../Content//bg.jpg) no-repeat center top;
+  background-size: cover;
+  max-height: 1080px;
 }
 input,
 button,
@@ -1128,7 +1130,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #18bc9c;
+  color: #000;
   text-decoration: none;
 }
 a:hover,
@@ -1640,6 +1642,7 @@ pre code {
 .row {
   margin-left: -15px;
   margin-right: -15px;
+  background-color: #0f3867;
 }
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
@@ -5849,7 +5852,7 @@ button.list-group-item-danger.active:focus {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #ecf0f1;
+  background-color: #0099ff;
   border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -7051,7 +7054,7 @@ article .author  {
   display: block;
   font-size: 100%;
   line-height: 1.42857143;
-  color: #b4bcc2;
+  color: #ff3e00;
 }
 article .author  {
   content: '\2014 \00A0';

@@ -15,11 +15,14 @@ namespace Blog.Models
           
         }
 
-        public Comment(int postId, string content)
+        public Comment(int postId, string content, string author)
         {
             
             this.Content = content;
             this.ArticleId = postId;
+            this.CommentAuthor = author;
+          
+            
         }
 
         [Key]
@@ -28,17 +31,16 @@ namespace Blog.Models
         [MaxLength(300)]
         public string Content { get; set; }
 
-        
+        public string CommentAuthor { get; set; }
 
         public int PostId { get; set; }
 
         public virtual Article Article { get; set; }
 
-
         [ForeignKey("Article")]
         public int ArticleId { get; set; }
 
-
+        
 
     }
 }

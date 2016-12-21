@@ -8,6 +8,11 @@ namespace Blog.Models
 {
     public class UserViewModel
     {
+        
+
+
+
+
         [Required]
         public string Email { get; set; }
 
@@ -20,6 +25,8 @@ namespace Blog.Models
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
         public List<Role> Roles { get; set; }
+
+       
 
 
     }
